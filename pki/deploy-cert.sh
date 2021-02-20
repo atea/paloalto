@@ -23,4 +23,4 @@ curl ${INSECURE} --silent --output /dev/null --form "file=@\"${CERT_FILE}\"" "ht
 curl ${INSECURE} --silent --output /dev/null --form "file=@\"${CERT_KEY}\"" "https://${PAN_HOST}/api/?type=import&category=private-key&certificate-name=${CERT_NAME}&format=pem&passphrase=foobar&key=${PAN_APIKEY}"
 
 # commit changes
-panxapi.py -t ${PAN_TAG} -C '' --sync > /dev/null 2>&1
+${PAN_BIN} -t ${PAN_TAG} -C '' --sync > /dev/null 2>&1
