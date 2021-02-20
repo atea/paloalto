@@ -17,10 +17,10 @@ PAN_HOST=$(grep "hostname%${PAN_TAG}" "${PAN_CONFIG}" | cut -d'=' -f2-)
 PAN_APIKEY=$(grep "api_key%${PAN_TAG}" "${PAN_CONFIG}" | cut -d'=' -f2-)
 
 # import cert
-curl ${INSECURE} --form "file=@\"${CERT_FILE}\"" "https://${PAN_HOST}/api/?type=import&category=certificate&certificate-name=${CERT_NAME}&format=pem&key=${PAN_APIKEY}"
+curl ${INSECURE} --silent --output /dev/null --form "file=@\"${CERT_FILE}\"" "https://${PAN_HOST}/api/?type=import&category=certificate&certificate-name=${CERT_NAME}&format=pem&key=${PAN_APIKEY}"
 
 # import key
-curl ${INSECURE} --form "file=@\"${CERT_KEY}\"" "https://${PAN_HOST}/api/?type=import&category=private-key&certificate-name=${CERT_NAME}&format=pem&passphrase=foobar&key=${PAN_APIKEY}"
+curl ${INSECURE} --silent --output /dev/null --form "file=@\"${CERT_KEY}\"" "https://${PAN_HOST}/api/?type=import&category=private-key&certificate-name=${CERT_NAME}&format=pem&passphrase=foobar&key=${PAN_APIKEY}"
 
 # commit changes
 panxapi.py -t ${PAN_TAG} -C '' --sync > /dev/null 2>&1
